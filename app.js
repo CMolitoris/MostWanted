@@ -47,7 +47,14 @@ function mainMenu(person, people){
 		// "weight": 250,
 		// "eyeColor": "brown",
 		// "occupation": "landscaper",
-		
+		console.log(
+      "Gender: " + person.gender 
+      + "\nDOB: " + person.dob 
+      + "\nHeight: " + person.height 
+      + "\nWeight: " + person.weight 
+      + "\nEyecolor: " + person.eyeColor 
+      + "\nOccupation: " + person.occupation
+    );
     break;
     case "family":
     // TODO: get person's family

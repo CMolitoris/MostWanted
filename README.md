@@ -1,6 +1,12 @@
 # Most Wanted 
 
 # User-Case Algorithm Pseudocode:
+// Prompts user for what they would like to search by
+// function receives data set
+// then parses for desired criteria
+// returns list/array of objects that match criteria
+// display list to console for user to view
+
 <!-- TODO: User-Case 1:  -->
 <!-- 
 (10 points): As a user, I want to be able to search for someone based on a single criterion
