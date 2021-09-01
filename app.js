@@ -16,6 +16,12 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
+      let singleMult = promptFor("Would you like to use single or multiple criteria in your search? (Valid input: Single/Multiple)".toLowerCase(),autoValid);
+      if(singleMult.localeCompare("single")===0) {
+        singleCriteraSearch(people);
+      } else if(singleMult.localeCompare("multiple")===0) {
+
+      }
       break;
       default:
     app(people); // restart app
@@ -25,6 +31,36 @@ function app(people){
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
+
+function singleCriteraSearch(people) {
+  let num = displayCriteria();
+  switch(num) {
+    case "1":
+      let eyeColor = promptFor("What color would you like to search for?\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
+      let personArr = searchByEyeColor(people,eyeColor);
+      for(let i=0;i<personArr.length;i++) {
+        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+      }
+      let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+      displayPerson(personArr[person-1]);
+      break;
+    case "2":
+
+
+
+
+  }
+  
+}
+        
+
+ // let arrCriteria = [data.eyeColor, data.id, data.height]
+function displayCriteria() {
+    //print options console
+    let num = prompt("Which would you like to select?\n1: Eye color \n2: ID \n3: Height\n4: Weight\n5: Gender");
+    return num;
+}
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -47,7 +83,7 @@ function mainMenu(person, people){
 		// "weight": 250,
 		// "eyeColor": "brown",
 		// "occupation": "landscaper",
-		console.log(
+		alert(
       "Gender: " + person.gender 
       + "\nDOB: " + person.dob 
       + "\nHeight: " + person.height 
@@ -99,14 +135,23 @@ function searchByName(people){
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+function searchByEyeColor(people,eyeColor){
 
+    let foundPeople = people.filter(function(potentialMatch){
+      if(potentialMatch.eyeColor === eyeColor){
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
+    // TODO: find the person single person object using the name they entered.
+    return foundPeople;
 }
+  
 
 //TODO: add other trait filter functions here.
-function searchByTratis(people) {
 
-}
 
 // Prompts user for what they would like to search by
 // function receives data set
