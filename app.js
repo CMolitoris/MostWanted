@@ -60,14 +60,16 @@ function singleCriteraSearch(people) {
   
 }
 
-// function multipleCriteraSearch(people) {
-//   let num = promptFor("How many criteria do you want in your search? \nEnter a number 2 - 5:", autoValid);
-//   let counter = 0;
-//   let multArr = []
-//   while (counter < num) {
-//     multArr.push(promptFor(parseInt(displayCriteria)))
-//   }
-// }
+function multipleCriteraSearch(people) {
+  let num = parseInt(promptFor("How many criteria do you want in your search? \nEnter a number 2 - 5:", autoValid));
+  let counter = 0;
+  let multArr = []
+  while (counter < num) {
+    multArr.push(parseInt(displayCriteria()));
+    counter++;
+  }
+  return searchByMultipleCriteria(people,multArr);
+}
 
 function displayArrPeople(personArr) {
   for(let i=0;i<personArr.length;i++) {
@@ -146,30 +148,31 @@ function searchByName(people){
 
 function searchByMultipleCriteria(people,arrChoices) {
   let personArr = people;
-  for(let i=0;i<arrChoices;i++) {
+  for(let i=0;i<arrChoices.length;i++) {
     switch(arrChoices[i]) {
       case 1:
         let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
-        personArr = searchByEyeCriteria(people,eyeColor);
+        personArr = searchByEyeCriteria(personArr,eyeColor);
         break;
       case 2:
-        let id = promptFor("Enter ID: ",autoValid);
-        personArr = searchByID(people,id);
+        let id = parseInt(promptFor("Enter ID: ",autoValid));
+        personArr = searchByID(personArr,id);
         break;
       case 3:
         let height = promptFor("Enter height: ",autoValid);
-        personArr = searchByHeight(people,height);
+        personArr = searchByHeight(personArr,height);
         break;
       case 4:
         let weight = promptFor("Enter weight: ",autoValid);
-        personArr = searchByWeight(people,weight);
+        personArr = searchByWeight(personArr,weight);
         break;
       case 5:
         let gender = promptFor("Enter gender: ",autoValid);
-        personArr = searchByGender(people,gender);
+        personArr = searchByGender(personArr,gender);
         break;    
     }
   }
+  return displayArrPeople(personArr);
 }
 
 
