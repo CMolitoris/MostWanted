@@ -100,21 +100,15 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
-    // "gender": "male",
-		// "dob": "5/9/1951",
-		// "height": 76,
-		// "weight": 250,
-		// "eyeColor": "brown",
-		// "occupation": "landscaper",
-		alert(
-      "Gender: " + person.gender 
-      + "\nDOB: " + person.dob 
-      + "\nHeight: " + person.height 
-      + "\nWeight: " + person.weight 
-      + "\nEyecolor: " + person.eyeColor 
-      + "\nOccupation: " + person.occupation
-    );
+		// alert(
+    //   "Gender: " + person.gender 
+    //   + "\nDOB: " + person.dob 
+    //   + "\nHeight: " + person.height 
+    //   + "\nWeight: " + person.weight 
+    //   + "\nEyecolor: " + person.eyeColor 
+    //   + "\nOccupation: " + person.occupation
+    // );
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -250,7 +244,13 @@ function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Last Name: " + person.lastName 
+    + "Gender: " + person.gender 
+    + "\nDOB: " + person.dob 
+    + "\nHeight: " + person.height 
+    + "\nWeight: " + person.weight 
+    + "\nEyecolor: " + person.eyeColor 
+    + "\nOccupation: " + person.occupation
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
