@@ -34,29 +34,27 @@ function app(people){
 
 function singleCriteraSearch(people) {
   let num = displayCriteria();
+  let personArr;
   switch(num) {
     case "1":
       let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
-      let personArr = searchByEyeCriteria(people,eyeColor);
+      personArr = searchByEyeCriteria(people,eyeColor);
       return displayArrPeople(personArr);
     case "2":
-      let id = prompt("Enter ID: ");
-      personArr = searchByEyeCriteria(people,id);
+      let id = promptFor("Enter ID: ",autoValid);
+      personArr = searchByID(people,id);
       return displayArrPeople(personArr);
     case "3":
-      let height = prompt("Enter height: ");
-      personArr = searchByEyeCriteria(people,height);
-      let personArr = searchByEyeCriteria(people,eyeColor);
+      let height = promptFor("Enter height: ",autoValid);
+      personArr = searchByHeight(people,height);
       return displayArrPeople(personArr);
     case "4":
-      let weight = prompt("Enter weight: ");
-      personArr = searchByEyeCriteria(people,weight);
-      let personArr = searchByEyeCriteria(people,eyeColor);
+      let weight = promptFor("Enter weight: ",autoValid);
+      personArr = searchByWeight(people,weight);
       return displayArrPeople(personArr);
     case "5":
       let gender = promptFor("Enter gender: ",autoValid);
-      personArr = searchByEyeCriteria(people,gender);
-      let personArr = searchByEyeCriteria(people,eyeColor);
+      personArr = searchByGender(people,gender);
       return displayArrPeople(personArr);
   }
   
@@ -161,12 +159,61 @@ function searchByEyeCriteria(people,criteria){
         return false;
       }
     })
-    // TODO: find the person single person object using the name they entered.
-    return foundPeople;
-}
   
-
+    return foundPeople;
+}  
 //TODO: add other trait filter functions here.
+function searchByGender(people,criteria) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === criteria){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+function searchByID(people,criteria) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.id === criteria){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+function searchByHeight(people,criteria) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.height === criteria){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
+function searchByWeight(people,criteria) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === criteria){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
 
 
 // Prompts user for what they would like to search by
