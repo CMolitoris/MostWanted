@@ -79,7 +79,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+  return foundPerson[0];
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
@@ -89,6 +89,11 @@ function searchByEyeColor(people){
 
 //TODO: add other trait filter functions here.
 
+// Prompts user for what they would like to search by
+// function receives data set
+// then parses for desired criteria
+// returns list/array of objects that match criteria
+// display list to console for user to view
 
 
 //#endregion
