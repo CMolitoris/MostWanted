@@ -18,7 +18,7 @@ function app(people){
       // TODO: search by traits
       let singleMult = promptFor("Would you like to use single or multiple criteria in your search? (Valid input: Single/Multiple)".toLowerCase(),autoValid);
       if(singleMult.localeCompare("single")===0) {
-        singleCriteraSearch(people);
+        searchResults = singleCriteraSearch(people);
       } else if(singleMult.localeCompare("multiple")===0) {
 
       }
@@ -36,21 +36,63 @@ function singleCriteraSearch(people) {
   let num = displayCriteria();
   switch(num) {
     case "1":
-      let eyeColor = promptFor("What color would you like to search for?\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
-      let personArr = searchByEyeColor(people,eyeColor);
+      let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
+      let personArr = searchByEyeCriteria(people,eyeColor);
       for(let i=0;i<personArr.length;i++) {
         console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
       }
       let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      displayPerson(personArr[person-1]);
-      break;
+      return personArr[person-1];
     case "2":
+      let id = prompt("Enter ID: ");
+      personArr = searchByEyeCriteria(people,id);
+      for(let i=0;i<personArr.length;i++) {
+        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+      }
+      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+      return personArr[person-1];
+    
+    case "3":
+      let height = prompt("Enter height: ");
 
+      personArr = searchByEyeCriteria(people,height);
+      for(let i=0;i<personArr.length;i++) {
+        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+      }
+      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+      return personArr[person-1];
+    
+    case "4":
+      let weight = prompt("Enter weight: ");
 
+      personArr = searchByEyeCriteria(people,weight);
+      for(let i=0;i<personArr.length;i++) {
+        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+      }
+      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+      return personArr[person-1];
+    
+    case "5":
+      let gender = promptFor("Enter gender: ",autoValid);
 
+      personArr = searchByEyeCriteria(people,gender);
+      for(let i=0;i<personArr.length;i++) {
+        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+      }
+      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+      return personArr[person-1];
+        
 
   }
   
+}
+
+function displayArrPeople(personArr) {
+  for(let i=0;i<personArr.length;i++) {
+    console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
+  }
+  let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+  displayPerson(personArr[person-1]);
 }
         
 
@@ -135,10 +177,9 @@ function searchByName(people){
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people,eyeColor){
-
+function searchByEyeCriteria(people,criteria){
     let foundPeople = people.filter(function(potentialMatch){
-      if(potentialMatch.eyeColor === eyeColor){
+      if(potentialMatch.eyeColor === criteria){
         return true;
       }
       else{
