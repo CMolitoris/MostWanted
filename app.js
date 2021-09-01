@@ -91,14 +91,6 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-		// alert(
-    //   "Gender: " + person.gender 
-    //   + "\nDOB: " + person.dob 
-    //   + "\nHeight: " + person.height 
-    //   + "\nWeight: " + person.weight 
-    //   + "\nEyecolor: " + person.eyeColor 
-    //   + "\nOccupation: " + person.occupation
-    // );
     displayPerson(person);
     break;
     case "family":
@@ -142,6 +134,35 @@ function searchByName(people){
   // TODO: find the person single person object using the name they entered.
   return foundPerson[0];
 }
+
+function searchByMultipleCriteria(people,arrChoices) {
+  let personArr = people;
+  for(let i=0;i<arrChoices;i++) {
+    switch(arrChoices[i]) {
+      case 1:
+        let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
+        personArr = searchByEyeCriteria(people,eyeColor);
+        break;
+      case 2:
+        let id = promptFor("Enter ID: ",autoValid);
+        personArr = searchByID(people,id);
+        break;
+      case 3:
+        let height = promptFor("Enter height: ",autoValid);
+        personArr = searchByHeight(people,height);
+        break;
+      case 4:
+        let weight = promptFor("Enter weight: ",autoValid);
+        personArr = searchByWeight(people,weight);
+        break;
+      case 5:
+        let gender = promptFor("Enter gender: ",autoValid);
+        personArr = searchByGender(people,gender);
+        break;    
+    }
+  }
+}
+
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeCriteria(people,criteria){
