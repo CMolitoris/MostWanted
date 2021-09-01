@@ -38,51 +38,26 @@ function singleCriteraSearch(people) {
     case "1":
       let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
       let personArr = searchByEyeCriteria(people,eyeColor);
-      for(let i=0;i<personArr.length;i++) {
-        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-      }
-      let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      return personArr[person-1];
+      return displayArrPeople(personArr);
     case "2":
       let id = prompt("Enter ID: ");
       personArr = searchByEyeCriteria(people,id);
-      for(let i=0;i<personArr.length;i++) {
-        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-      }
-      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      return personArr[person-1];
-    
+      return displayArrPeople(personArr);
     case "3":
       let height = prompt("Enter height: ");
-
       personArr = searchByEyeCriteria(people,height);
-      for(let i=0;i<personArr.length;i++) {
-        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-      }
-      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      return personArr[person-1];
-    
+      let personArr = searchByEyeCriteria(people,eyeColor);
+      return displayArrPeople(personArr);
     case "4":
       let weight = prompt("Enter weight: ");
-
       personArr = searchByEyeCriteria(people,weight);
-      for(let i=0;i<personArr.length;i++) {
-        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-      }
-      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      return personArr[person-1];
-    
+      let personArr = searchByEyeCriteria(people,eyeColor);
+      return displayArrPeople(personArr);
     case "5":
       let gender = promptFor("Enter gender: ",autoValid);
-
       personArr = searchByEyeCriteria(people,gender);
-      for(let i=0;i<personArr.length;i++) {
-        console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-      }
-      person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-      return personArr[person-1];
-        
-
+      let personArr = searchByEyeCriteria(people,eyeColor);
+      return displayArrPeople(personArr);
   }
   
 }
@@ -92,7 +67,7 @@ function displayArrPeople(personArr) {
     console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
   }
   let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
-  displayPerson(personArr[person-1]);
+  return personArr[person-1];
 }
         
 
