@@ -20,7 +20,7 @@ function app(people){
       if(singleMult.localeCompare("single")===0) {
         searchResults = singleCriteraSearch(people);
       } else if(singleMult.localeCompare("multiple")===0) {
-
+        searchResults = multipleCriteraSearch(people);
       }
       break;
       default:
@@ -59,6 +59,15 @@ function singleCriteraSearch(people) {
   }
   
 }
+
+// function multipleCriteraSearch(people) {
+//   let num = promptFor("How many criteria do you want in your search? \nEnter a number 2 - 5:", autoValid);
+//   let counter = 0;
+//   let multArr = []
+//   while (counter < num) {
+//     multArr.push(promptFor(parseInt(displayCriteria)))
+//   }
+// }
 
 function displayArrPeople(personArr) {
   for(let i=0;i<personArr.length;i++) {
