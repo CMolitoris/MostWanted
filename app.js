@@ -41,9 +41,18 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    // "gender": "male",
+		// "dob": "5/9/1951",
+		// "height": 76,
+		// "weight": 250,
+		// "eyeColor": "brown",
+		// "occupation": "landscaper",
+		
     break;
     case "family":
     // TODO: get person's family
+    // "parents": [],
+		// "currentSpouse": 260451248
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -88,6 +97,9 @@ function searchByEyeColor(people){
 }
 
 //TODO: add other trait filter functions here.
+function searchByTratis(people) {
+
+}
 
 // Prompts user for what they would like to search by
 // function receives data set
