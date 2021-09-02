@@ -1,12 +1,12 @@
 "use strict"
 
 
-//Menu functions.
-//Used for the overall flow of the application.
+//*Menu functions.
+//*Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
-//#region 
+//*region 
 
-// app is the function called to start the entire application
+//? app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'",yesNo,people).toLowerCase();
   let searchResults;
@@ -28,7 +28,7 @@ function app(people){
       break;
   }
   
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  //? Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
 
@@ -88,7 +88,7 @@ function displayCriteria() {
 }
 
 
-// Menu function to call once you find who you are looking for
+//? Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
@@ -123,12 +123,12 @@ function mainMenu(person, people){
   }
 }
 
-//#endregion
+//*endregion
 
-//Filter functions.
-//Ideally you will have a function for each trait.
+//*Filter functions.
+//*Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
-//#region 
+//*region 
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
@@ -177,7 +177,7 @@ function searchByMultipleCriteria(people,arrChoices) {
 }
 
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+//Searches through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeCriteria(people,criteria){
     let foundPeople = people.filter(function(potentialMatch){
       if(potentialMatch.eyeColor === criteria){
@@ -190,7 +190,7 @@ function searchByEyeCriteria(people,criteria){
   
     return foundPeople;
 }  
-//TODO: add other trait filter functions here.
+
 function searchByGender(people,criteria) {
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.gender === criteria){
@@ -243,20 +243,18 @@ function searchByWeight(people,criteria) {
   return foundPeople;
 }
 
-
 // Prompts user for what they would like to search by
 // function receives data set
 // then parses for desired criteria
 // returns list/array of objects that match criteria
 // display list to console for user to view
 
+//*endregion
 
-//#endregion
-
-//Display functions.
-//Functions for user interface.
+//*Display functions.
+//*Functions for user interface.
 /////////////////////////////////////////////////////////////////
-//*region 
+//*region - display functions
 
 //? alerts a list of people
 function displayPeople(people){
@@ -280,6 +278,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+//TODO: add validation
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
   let parents = [];
@@ -293,14 +292,15 @@ const displayFamily = function (people, person) {
 }
 
 
+
 //*endregion
 
 
 
-//Validation functions.
-//Functions to validate user input.
-/////////////////////////////////////////////////////////////////
-//#region 
+//*Validation functions.
+//*Functions to validate user input.
+//*///////////////////////////////////////////////////////////////
+//*region 
 
 //a function that takes in a question to prompt, and a callback function to validate the user input.
 //response: Will capture the user input.
@@ -367,4 +367,4 @@ function genderValitdation(input) {
   return input==="male" || input==="female";
 }
 
-//endregion
+//*endregion
