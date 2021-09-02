@@ -37,7 +37,7 @@ function singleCriteraSearch(people) {
   let personArr;
   switch(num) {
     case "1":
-      let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
+      let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation);
       personArr = searchByEyeCriteria(people,eyeColor);
       return displayArrPeople(personArr);
     case "2":
@@ -151,7 +151,7 @@ function searchByMultipleCriteria(people,arrChoices) {
   for(let i=0;i<arrChoices.length;i++) {
     switch(arrChoices[i]) {
       case 1:
-        let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),autoValid);
+        let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation);
         personArr = searchByEyeCriteria(personArr,eyeColor);
         break;
       case 2:
@@ -319,8 +319,16 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input){
-  
+function genderEyeValidation(input){
+  let validateInput = ["blue","brown","black","hazel","green","male","female"];
+  return validateInput.includes(input);
+}
+
+function idValidation(input) {
+  let idPeople = [272822514,401222887,409574486,260451248,629807187,464142841,
+    982411429,595767575,693243224,888201200,878013758,951747547,159819275,348457184,
+    294874671,931247228,822843554,819168108,969837479,313207561,313997561,313998000];
+  return idPeople.includes(input);
 }
 
 //#endregion
