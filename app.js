@@ -335,6 +335,7 @@ function yesNo(input){
     return true;
   }
   else{
+    alert("Invalid Response! Please try again and type: Yes or No")
     return false;
   }
 }
