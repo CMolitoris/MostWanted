@@ -246,6 +246,21 @@ function searchByWeight(people,criteria) {
   return foundPeople;
 }
 
+function searchByParentID(people, person) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if (potentialMatch === person) {
+      return
+    } else if(JSON.stringify(potentialMatch.parents) === JSON.stringify(person.parents)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
 // Prompts user for what they would like to search by
 // function receives data set
 // then parses for desired criteria
@@ -280,10 +295,11 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-//TODO: add validation
+//TODO: add option for siblings and validate response
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
   let parents = personParents(people, person);
+  let siblings = searchByParentID(people, person)
   // person.parents.forEach(function (element){
   //   parents.push(searchByID(people,element));
   // }); //searchByID(people, person.parents)
@@ -291,6 +307,7 @@ const displayFamily = function (people, person) {
   ${person.firstName} ${person.lastName}'s Immediate Family:
   Spouse: ${hasSpouse(spouse)}
   Parent(s): ${hasParents(parents)}
+  Sibling(s): ${hasSiblings(siblings)}
   `)
   return msg
 }
@@ -417,6 +434,18 @@ const hasParents = function (parents) {
     for (let i = 0; i < parents.length; i++)
     parentNames += `${parents[i][0].firstName} ${parents[i][0].lastName} - `
     return parentNames
+  } 
+  else {
+    return "N/A"
+  }
+}
+
+const hasSiblings = function (siblings) {
+  let siblingNames = ""
+  if (siblings.length >= 1) {
+    for (let i = 0; i < siblings.length; i++)
+    siblingNames += `${siblings[i].firstName} ${siblings[i].lastName} - `
+    return siblingNames
   } 
   else {
     return "N/A"
