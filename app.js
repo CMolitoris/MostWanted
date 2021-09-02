@@ -45,11 +45,11 @@ function singleCriteraSearch(people) {
       personArr = searchByID(people,id);
       return displayArrPeople(personArr);
     case "3":
-      let height = promptFor("Enter height: ",autoValid);
+      let height = parseInt(promptFor("Enter height: ",heightValidation,people));
       personArr = searchByHeight(people,height);
       return displayArrPeople(personArr);
     case "4":
-      let weight = promptFor("Enter weight: ",autoValid);
+      let weight = parseInt(promptFor("Enter weight: ",weightValidation,people));
       personArr = searchByWeight(people,weight);
       return displayArrPeople(personArr);
     case "5":
@@ -152,7 +152,7 @@ function searchByMultipleCriteria(people,arrChoices) {
   for(let i=0;i<arrChoices.length;i++) {
     switch(arrChoices[i]) {
       case 1:
-        let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation);
+        let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation,people);
         personArr = searchByEyeCriteria(personArr,eyeColor);
         break;
       case 2:
@@ -160,15 +160,15 @@ function searchByMultipleCriteria(people,arrChoices) {
         personArr = searchByID(personArr,id);
         break;
       case 3:
-        let height = promptFor("Enter height: ",autoValid);
+        let height = promptFor("Enter height: ",heightValidation,people);
         personArr = searchByHeight(personArr,height);
         break;
       case 4:
-        let weight = promptFor("Enter weight: ",autoValid);
+        let weight = promptFor("Enter weight: ",weightValidation,people);
         personArr = searchByWeight(personArr,weight);
         break;
       case 5:
-        let gender = promptFor("Enter gender: ",autoValid);
+        let gender = promptFor("Enter gender: ",genderValitdation);
         personArr = searchByGender(personArr,gender);
         break;    
     }
@@ -268,7 +268,7 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName 
-    + "Gender: " + person.gender 
+    + "\nGender: " + person.gender 
     + "\nDOB: " + person.dob 
     + "\nHeight: " + person.height 
     + "\nWeight: " + person.weight 
@@ -366,5 +366,32 @@ function generateIds(people) {
 function genderValitdation(input) {
   return input==="male" || input==="female";
 }
+
+function heightValidation(input,people) {
+  let heightPeople = generateHeights(people);
+  return heightPeople.includes(parseInt(input));
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateHeights(people) {
+  let arr = [];
+  people.forEach(function (element) {
+    arr.push(element.height);
+  });
+  return arr;
+}
+
+function weightValidation(input,people) {
+  let weightPeople = generateWeights(people);
+  return weightPeople.includes(parseInt(input));
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateWeights(people) {
+  let arr = [];
+  people.forEach(function (element) {
+    arr.push(element.weight);
+  });
+  return arr;
+}
+
 
 //*endregion
