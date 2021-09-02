@@ -287,10 +287,11 @@ const displayFamily = function (people, person) {
   }); //searchByID(people, person.parents)
   let msg = alert(`
   ${person.firstName} ${person.lastName}'s Immediate Family:
-  Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`)
+  Spouse: ${hasSpouse(spouse)}
+  Parent(s): ${hasParents(parents)}
+  `)
   return msg
 }
-
 
 
 //*endregion
@@ -393,5 +394,24 @@ function generateWeights(people) {
   return arr;
 }
 
+const hasSpouse = function (spouse) {
+  if (spouse.length >= 1) {
+    return `${spouse[0].firstName} ${spouse[0].lastName}`
+  } else {
+    return "N/A"
+  }
+}
+
+const hasParents = function (parents) {
+  let parentNames = ""
+  if (parents.length >= 1) {
+    for (let i = 0; i < parents.length; i++)
+    parentNames += `${parents[i][0].firstName} ${parents[i][0].lastName} - `
+    return parentNames
+  } 
+  else {
+    return "N/A"
+  }
+}
 
 //*endregion
