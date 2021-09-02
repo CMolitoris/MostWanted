@@ -1,6 +1,5 @@
 "use strict"
 
-
 //*Menu functions.
 //*Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -89,7 +88,6 @@ function displayCriteria() {
     return num;
 }
 
-
 //? Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -134,8 +132,8 @@ function mainMenu(person, people){
 // display list to console for user to view
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", firstNameValidation, people);
+  let lastName = promptFor("What is the person's last name?", lastNameValidation, people);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -176,7 +174,6 @@ function searchByMultipleCriteria(people,arrChoices) {
   }
   return displayArrPeople(personArr);
 }
-
 
 //Searches through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeCriteria(people,criteria){
@@ -362,6 +359,15 @@ function generateEye(people) {
     return arr;
 }
 
+function firstNameValidation (input, people) {
+  let firstName = generateFirstNames (people);
+  return firstName.includes(input);
+}
+function lastNameValidation (input, people) {
+  let firstName = generateLastNames (people);
+  return firstName.includes(input);
+}
+
 function idValidation(input,people) {
    let idPeople = generateIds(people);
   //  [272822514,401222887,409574486,260451248,629807187,464142841,
@@ -370,6 +376,22 @@ function idValidation(input,people) {
     return idPeople.includes(parseInt(input));
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateFirstNames (people) {
+  let arr = [];
+  people.forEach(function(element){
+    arr.push(element.firstName);
+  });
+  return arr;
+}
+
+function generateLastNames (people) {
+  let arr = [];
+  people.forEach(function(element){
+    arr.push(element.lastName);
+  });
+  return arr;
+}
+
 function generateIds(people) {
     let arr = [];
     people.forEach(function(element){
