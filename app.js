@@ -72,10 +72,13 @@ function multipleCriteraSearch(people) {
 }
 
 function displayArrPeople(personArr) {
-  for(let i=0;i<personArr.length;i++) {
-    console.log((i+1) + ": " + personArr[i].firstName + " " + personArr[i].lastName);
-  }
-  let person = prompt("which would you like to see information on?" + " (1-" + personArr.length + ")");
+  let array = [];
+  let counter = 1;
+  personArr.forEach(function (element) {
+    array.push(counter + ": " + element.firstName + " " + element.lastName);
+    counter++;
+  })
+  let person = prompt(array.join("\n") + "\n\nwhich would you like to see information on?" + " (1-" + personArr.length + ")");
   return personArr[person-1];
 }
         
@@ -274,7 +277,6 @@ function displayPerson(person){
     + "\nWeight: " + person.weight 
     + "\nEyecolor: " + person.eyeColor 
     + "\nOccupation: " + person.occupation
-  // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
 
