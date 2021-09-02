@@ -8,7 +8,7 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'",yesNo,people).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
@@ -37,11 +37,11 @@ function singleCriteraSearch(people) {
   let personArr;
   switch(num) {
     case "1":
-      let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation);
+      let eyeColor = promptFor("Enter eye color:\n(Blue,Brown,Black,Hazel,Green)".toLowerCase(),eyeValidation,people);
       personArr = searchByEyeCriteria(people,eyeColor);
       return displayArrPeople(personArr);
     case "2":
-      let id = promptFor("Enter ID: ",autoValid);
+      let id = parseInt(promptFor("Enter ID: ",idValidation,people));
       personArr = searchByID(people,id);
       return displayArrPeople(personArr);
     case "3":
@@ -53,7 +53,7 @@ function singleCriteraSearch(people) {
       personArr = searchByWeight(people,weight);
       return displayArrPeople(personArr);
     case "5":
-      let gender = promptFor("Enter gender: ",autoValid);
+      let gender = promptFor("Enter gender: ",genderValitdation);
       personArr = searchByGender(people,gender);
       return displayArrPeople(personArr);
   }
@@ -155,7 +155,7 @@ function searchByMultipleCriteria(people,arrChoices) {
         personArr = searchByEyeCriteria(personArr,eyeColor);
         break;
       case 2:
-        let id = parseInt(promptFor("Enter ID: ",autoValid));
+        let id = parseInt(promptFor("Enter ID: ",idValidation,people));
         personArr = searchByID(personArr,id);
         break;
       case 3:
@@ -292,11 +292,11 @@ function displayPerson(person){
 //response: Will capture the user input.
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
-function promptFor(question, valid){
+function promptFor(question,valid,people){
   let isValid;
   do{
     var response = prompt(question).trim();
-    isValid = valid(response);
+    isValid = valid(response,people);
   } while(response === ""  ||  isValid === false)
   return response;
 }
@@ -313,22 +313,44 @@ function yesNo(input){
 
 // helper function to pass in as default promptFor validation.
 //this will always return true for all inputs.
-function autoValid(input){
+function autoValid(input,people) {
   return true; // default validation only
 }
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function genderEyeValidation(input){
-  let validateInput = ["blue","brown","black","hazel","green","male","female"];
+function eyeValidation(input,people){
+  let validateInput = generateEye(people);
+  // ["blue","brown","black","hazel","green"];
   return validateInput.includes(input);
 }
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateEye(people) {
+  let arr = [];
+    people.forEach(function(element){
+      arr.push(element.eyeColor);
+    });
+    return arr;
+}
 
-function idValidation(input) {
-  let idPeople = [272822514,401222887,409574486,260451248,629807187,464142841,
-    982411429,595767575,693243224,888201200,878013758,951747547,159819275,348457184,
-    294874671,931247228,822843554,819168108,969837479,313207561,313997561,313998000];
-  return idPeople.includes(input);
+function idValidation(input,people) {
+   let idPeople = generateIds(people);
+  //  [272822514,401222887,409574486,260451248,629807187,464142841,
+  //   982411429,595767575,693243224,888201200,878013758,951747547,159819275,348457184,
+  //   294874671,931247228,822843554,819168108,969837479,313207561,313997561,313998000];
+    return idPeople.includes(parseInt(input));
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateIds(people) {
+    let arr = [];
+    people.forEach(function(element){
+      arr.push(element.id);
+    });
+    return arr;
+}
+
+function genderValitdation(input) {
+  return input==="male" || input==="female";
 }
 
 //#endregion
