@@ -247,6 +247,21 @@ function searchByWeight(people,criteria) {
   return foundPeople;
 }
 
+function searchByParentID(people, person) {
+  let foundPeople = people.filter(function(potentialMatch){
+    if (potentialMatch === person) {
+      return
+    } else if(JSON.stringify(potentialMatch.parents) === JSON.stringify(person.parents)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPeople;
+}
+
 // Prompts user for what they would like to search by
 // function receives data set
 // then parses for desired criteria
@@ -281,18 +296,23 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-//TODO: add validation
+//TODO: add option for siblings and validate response
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
-  let parents = [];
-  person.parents.forEach(function (element){
-    parents.push(searchByID(people,element));
-  }); //searchByID(people, person.parents)
+  let parents = personParents(people, person);
+  let siblings = searchByParentID(people, person)
+  // person.parents.forEach(function (element){
+  //   parents.push(searchByID(people,element));
+  // }); //searchByID(people, person.parents)
   let msg = alert(`
   ${person.firstName} ${person.lastName}'s Immediate Family:
-  Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`)
+  Spouse: ${hasSpouse(spouse)}
+  Parent(s): ${hasParents(parents)}
+  Sibling(s): ${hasSiblings(siblings)}
+  `)
   return msg
 }
+
 
 function displayDescendants(people,person) {
   // if person.id == people.parents[] then they are are a descendant of person
@@ -330,6 +350,13 @@ function descendantsRecursive(people,person,array) {
 
 }
 
+function personParents(people, person) {
+  let parents = []
+  person.parents.forEach(function (element){
+    parents.push(searchByID(people,element));
+  })
+  return parents
+}
 
 
 //*endregion
@@ -432,11 +459,46 @@ function generateWeights(people) {
   return arr;
 }
 
+
 function menuValidation(input) {
   if(input==="info" || input==="family" || input==="descendants" || input==="restart" || input === "exit") {
     return true;
   }
   return false;
 }
+
+const hasSpouse = function (spouse) {
+  if (spouse.length >= 1) {
+    return `${spouse[0].firstName} ${spouse[0].lastName}`
+  } else {
+    return "N/A"
+  }
+}
+
+const hasParents = function (parents) {
+  let parentNames = ""
+  if (parents.length >= 1) {
+    for (let i = 0; i < parents.length; i++)
+    parentNames += `${parents[i][0].firstName} ${parents[i][0].lastName} - `
+    return parentNames
+  } 
+  else {
+    return "N/A"
+  }
+}
+
+const hasSiblings = function (siblings) {
+  let siblingNames = ""
+  if (siblings.length >= 1) {
+    for (let i = 0; i < siblings.length; i++)
+    siblingNames += `${siblings[i].firstName} ${siblings[i].lastName} - `
+    return siblingNames
+  } 
+  else {
+    return "N/A"
+  }
+
+}
+
 
 //*endregion
