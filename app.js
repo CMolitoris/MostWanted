@@ -283,10 +283,10 @@ function displayPerson(person){
 //TODO: add validation
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
-  let parents = [];
-  person.parents.forEach(function (element){
-    parents.push(searchByID(people,element));
-  }); //searchByID(people, person.parents)
+  let parents = personParents(people, person);
+  // person.parents.forEach(function (element){
+  //   parents.push(searchByID(people,element));
+  // }); //searchByID(people, person.parents)
   let msg = alert(`
   ${person.firstName} ${person.lastName}'s Immediate Family:
   Spouse: ${hasSpouse(spouse)}
@@ -295,6 +295,13 @@ const displayFamily = function (people, person) {
   return msg
 }
 
+function personParents(people, person) {
+  let parents = []
+  person.parents.forEach(function (element){
+    parents.push(searchByID(people,element));
+  })
+  return parents
+}
 
 //*endregion
 
