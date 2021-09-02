@@ -101,7 +101,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'".toLowerCase(), menuValidation);
 
   switch(displayOption){
     case "info":
@@ -109,12 +109,13 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
-    displayFamily(people, person)
+    displayFamily(people, person);
     // "parents": [],
 		// "currentSpouse": 260451248
     break;
     case "descendants":
     // TODO: get person's descendants
+    displayDescendants(people,person);
     break;
     case "restart":
     app(people); // restart
@@ -207,9 +208,9 @@ function searchByGender(people,criteria) {
   return foundPeople;
 }
 
-function searchByID(people,criteria) {
+function searchByID(people,id) {
   let foundPeople = people.filter(function(potentialMatch){
-    if(potentialMatch.id === criteria){
+    if(potentialMatch.id === id){
       return true;
     }
     else{
@@ -217,7 +218,7 @@ function searchByID(people,criteria) {
     }
   })
 
-  return foundPeople;
+  return foundPeople[0];
 }
 
 function searchByHeight(people,criteria) {
@@ -291,6 +292,42 @@ const displayFamily = function (people, person) {
   ${person.firstName} ${person.lastName}'s Immediate Family:
   Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`)
   return msg
+}
+
+function displayDescendants(people,person) {
+  // if person.id == people.parents[] then they are are a descendant of person
+  // people.forEach(function (element) {
+  //   element.parents.forEach(function (element) {
+  //     if(element = person.id) {
+  //       arr.push(element);
+  //     }
+  //   })
+  // })
+  // array.forEach(function (element) {
+  //   searchArr.push(searchByID(people,element));
+  // })
+  let temp = [];
+  let array = descendantsRecursive(people,person,temp);
+  console.log(array);
+
+}
+
+function descendantsRecursive(people,person,array) {
+  let newArray = array;
+  people.forEach(function (element) {
+    if(element.parents[0]===person.id) {
+      let newDescentdant = searchByID(people,element.id);
+      array.push(newDescentdant);
+      descendantsRecursive(newArray,newDescentdant,newArray);
+    } 
+    else if(element.parents[1]===person.id) {
+      let newDescentdant = searchByID(people,element.id);
+      array.push(newDescentdant);
+      descendantsRecursive(newArray,newDescentdant,newArray);
+    } 
+    return newArray;
+  })
+
 }
 
 
@@ -395,5 +432,11 @@ function generateWeights(people) {
   return arr;
 }
 
+function menuValidation(input) {
+  if(input==="info" || input==="family" || input==="descendants" || input==="restart" || input === "exit") {
+    return true;
+  }
+  return false;
+}
 
 //*endregion
