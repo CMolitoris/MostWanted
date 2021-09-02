@@ -106,6 +106,7 @@ function mainMenu(person, people){
     break;
     case "family":
     // TODO: get person's family
+    displayFamily(people, person)
     // "parents": [],
 		// "currentSpouse": 260451248
     break;
@@ -255,9 +256,9 @@ function searchByWeight(people,criteria) {
 //Display functions.
 //Functions for user interface.
 /////////////////////////////////////////////////////////////////
-//#region 
+//*region 
 
-// alerts a list of people
+//? alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
@@ -279,7 +280,17 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-//#endregion
+const displayFamily = function (people, person) {
+  let spouse = searchByID(people, person.currentSpouse)
+  // let parents = searchByID(people, person.parents)
+  let msg = alert(`
+  ${person.firstName} ${person.lastName}'s Immediate Family:
+  Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`)
+  return msg
+}
+
+
+//*endregion
 
 
 
@@ -331,4 +342,4 @@ function idValidation(input) {
   return idPeople.includes(input);
 }
 
-//#endregion
+//endregion
