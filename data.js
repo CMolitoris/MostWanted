@@ -11,7 +11,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "programmer",
 		"parents": [],
-		"currentSpouse": 401222887
+		"currentSpouse": 401222887 // Uma Bob
 	},
 	{
 		"id": 401222887,
@@ -24,7 +24,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "assistant",
 		"parents": [],
-		"currentSpouse": 272822514
+		"currentSpouse": 272822514 // Billy Bob
 	},
 	{
 		"id": 409574486,
@@ -37,7 +37,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "landscaper",
 		"parents": [],
-		"currentSpouse": 260451248
+		"currentSpouse": 260451248 // Jon Walkens
 	},
 	{
 		"id": 260451248,
@@ -50,7 +50,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "assistant",
 		"parents": [],
-		"currentSpouse": 409574486
+		"currentSpouse": 409574486 // Michael Walkens
 	},
 	{
 		"id": 629807187,
@@ -63,7 +63,7 @@ const data = [
 		"eyeColor": "black",
 		"occupation": "nurse",
 		"parents": [],
-		"currentSpouse": 464142841
+		"currentSpouse": 464142841 // Jen Pafoy
 	},
 	{
 		"id": 464142841,
@@ -76,7 +76,7 @@ const data = [
 		"eyeColor": "black",
 		"occupation": "student",
 		"parents": [],
-		"currentSpouse": 629807187
+		"currentSpouse": 629807187 // Jack Pafoy
 	},
 	{
 		"id": 982411429,
@@ -89,7 +89,7 @@ const data = [
 		"eyeColor": "hazel",
 		"occupation": "architect",
 		"parents": [],
-		"currentSpouse": 595767575
+		"currentSpouse": 595767575 // Missuz Patatoo
 	},
 	{
 		"id": 595767575,
@@ -102,7 +102,7 @@ const data = [
 		"eyeColor": "blue",
 		"occupation": "architect",
 		"parents": [],
-		"currentSpouse": 982411429
+		"currentSpouse": 982411429 // Mister Patatoo
 	},
 	{
 		"id": 693243224,
@@ -140,8 +140,8 @@ const data = [
 		"weight": 118,
 		"eyeColor": "brown",
 		"occupation": "programmer",
-		"parents": [401222887],
-		"currentSpouse": 294874671
+		"parents": [401222887], // Uma Bob
+		"currentSpouse": 294874671 // Dave Pafoy
 	},
 	{
 		"id": 951747547,
@@ -153,8 +153,8 @@ const data = [
 		"weight": 179,
 		"eyeColor": "blue",
 		"occupation": "nurse",
-		"parents": [401222887],
-		"currentSpouse": 159819275
+		"parents": [401222887], // Uma Bob
+		"currentSpouse": 159819275 // Jasmine Bob
 	},
 	{
 		"id": 159819275,
@@ -166,8 +166,8 @@ const data = [
 		"weight": 156,
 		"eyeColor": "blue",
 		"occupation": "assistant",
-		"parents": [409574486, 260451248],
-		"currentSpouse": 951747547
+		"parents": [409574486, 260451248], // Michael Walkens, Jon Walkens
+		"currentSpouse": 951747547 // Ralph Bob
 	},
 	{
 		"id": 348457184,
@@ -179,7 +179,7 @@ const data = [
 		"weight": 235,
 		"eyeColor": "hazel",
 		"occupation": "landscaper",
-		"parents": [629807187, 464142841],
+		"parents": [629807187, 464142841], // Jack Pafoy, Jen Pafoy
 		"currentSpouse": null
 	},
 	{
@@ -192,8 +192,8 @@ const data = [
 		"weight": 112,
 		"eyeColor": "green",
 		"occupation": "doctor",
-		"parents": [629807187, 464142841],
-		"currentSpouse": 878013758
+		"parents": [629807187, 464142841], // Jack Pafoy, Jen Pafoy
+		"currentSpouse": 878013758 // Jill Pafoy
 	},
 	{
 		"id": 931247228,
@@ -205,7 +205,7 @@ const data = [
 		"weight": 184,
 		"eyeColor": "brown",
 		"occupation": "landscaper",
-		"parents": [629807187, 464142841],
+		"parents": [629807187, 464142841], // Jack Pafoy, Jen Pafoy
 		"currentSpouse": null
 	},
 	{
@@ -218,7 +218,7 @@ const data = [
 		"weight": 249,
 		"eyeColor": "brown",
 		"occupation": "nurse",
-		"parents": [693243224, 888201200],
+		"parents": [693243224, 888201200], // Joy Madden, Mader Madden
 		"currentSpouse": null
 	},
 	{
@@ -231,7 +231,7 @@ const data = [
 		"weight": 187,
 		"eyeColor": "brown",
 		"occupation": "politician",
-		"parents": [693243224, 888201200],
+		"parents": [693243224, 888201200], // Joy Madden, Mader Madden
 		"currentSpouse": null
 	},
 	{
@@ -244,7 +244,7 @@ const data = [
 		"weight": 241,
 		"eyeColor": "brown",
 		"occupation": "assistant",
-		"parents": [693243224, 888201200],
+		"parents": [693243224, 888201200], // Joy Madden, Mader Madden
 		"currentSpouse": null
 	},
 	{
@@ -257,8 +257,8 @@ const data = [
 		"weight": 110,
 		"eyeColor": "blue",
 		"occupation": "assistant",
-		"parents": [693243224, 888201200],
-		"currentSpouse": 313997561
+		"parents": [693243224, 888201200], // Joy Madden, Mader Madden
+		"currentSpouse": 313997561 // Ellen Madden
 	},
 	{
 		"id": 313997561,
@@ -271,7 +271,7 @@ const data = [
 		"eyeColor": "blue",
 		"occupation": "doctor",
 		"parents": [],
-		"currentSpouse": 313207561
+		"currentSpouse": 313207561 // Mattias Madden
 	},
 	{
 		"id": 313998000,
@@ -283,7 +283,9 @@ const data = [
 		"weight": 100,
 		"eyeColor": "blue",
 		"occupation": "doctor",
-		"parents": [313207561, 313997561],
+		"parents": [313207561, 313997561], // Mattias Madden, Ellen Madden
 		"currentSpouse": null
 	}
 ];
+
+// TODO: Family Trees: 
