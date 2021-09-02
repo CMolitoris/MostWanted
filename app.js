@@ -282,7 +282,10 @@ function displayPerson(person){
 
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
-  // let parents = searchByID(people, person.parents)
+  let parents = [];
+  person.parents.forEach(function (element){
+    parents.push(searchByID(people,element));
+  }); //searchByID(people, person.parents)
   let msg = alert(`
   ${person.firstName} ${person.lastName}'s Immediate Family:
   Spouse: ${spouse[0].firstName} ${spouse[0].lastName}`)
