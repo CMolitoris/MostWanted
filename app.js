@@ -106,6 +106,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     displayPerson(person);
+    mainMenu(person,people);
     break;
     case "family":
     // TODO: get person's family
@@ -315,39 +316,46 @@ const displayFamily = function (people, person) {
 
 
 function displayDescendants(people,person) {
-  // if person.id == people.parents[] then they are are a descendant of person
-  // people.forEach(function (element) {
-  //   element.parents.forEach(function (element) {
-  //     if(element = person.id) {
-  //       arr.push(element);
-  //     }
-  //   })
-  // })
-  // array.forEach(function (element) {
-  //   searchArr.push(searchByID(people,element));
-  // })
-  let temp = [];
-  let array = descendantsRecursive(people,person,temp);
-  console.log(array);
+  let tempA = [];
+  let array = descendantsRecursive(people,person,tempA);
 
+  if(array.length>=0) {
+    let newArray = [];
+    let counter = 1;
+    array.forEach(function (element) {
+      newArray.push(counter + ": " + element.firstName + " " + element.lastName);
+      counter++;
+    });
+    alert(newArray.join("\n"));
+  
+  } else {
+    alert("The selected person has no descendants.");
+  }
+  
+  mainMenu(person,people);
 }
 
-function descendantsRecursive(people,person,array) {
-  let newArray = array;
+function descendantsRecursive(people,person,temp) {
+  let newArray=temp;
+  let newEntry = false;
   people.forEach(function (element) {
     if(element.parents[0]===person.id) {
-      let newDescentdant = searchByID(people,element.id);
-      array.push(newDescentdant);
-      descendantsRecursive(newArray,newDescentdant,newArray);
+      newArray.push(element);
+      newEntry = true;
+      //descendantsRecursive(people,element,newArray);
     } 
     else if(element.parents[1]===person.id) {
-      let newDescentdant = searchByID(people,element.id);
-      array.push(newDescentdant);
-      descendantsRecursive(newArray,newDescentdant,newArray);
+      newArray.push(element);
+      newEntry = true;
+      //descendantsRecursive(people,element,newArray);
     } 
-    return newArray;
-  })
-
+  });
+  if(newEntry) {
+    newArray.forEach(function (element) {
+        descendantsRecursive(people,element,newArray);
+    });
+  }
+  return newArray;
 }
 
 function personParents(people, person) {
