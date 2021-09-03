@@ -107,9 +107,11 @@ function mainMenu(person, people){
     break;
     case "family": // get person's family
       displayFamily(people, person)
+      mainMenu(person,people);
       break;
     case "descendants": // get person's descendants
       displayDescendants(people,person);
+      mainMenu(person,people);
       break;
     case "restart":
       app(people); // restart
