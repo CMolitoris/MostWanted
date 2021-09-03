@@ -1,6 +1,5 @@
 "use strict"
 
-
 //*Menu functions.
 //*Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -15,7 +14,6 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
       let singleMult = promptFor("Would you like to use single or multiple criteria in your search? (Valid input: Single/Multiple)".toLowerCase(),autoValid);
       if(singleMult.localeCompare("single")===0) {
         searchResults = singleCriteraSearch(people);
@@ -90,7 +88,6 @@ function displayCriteria() {
     return num;
 }
 
-
 //? Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -101,22 +98,17 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'".toLowerCase(), menuValidation);
+  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
   switch(displayOption){
     case "info":
     displayPerson(person);
     mainMenu(person,people);
     break;
-    case "family":
-    // TODO: get person's family
-    displayFamily(people, person);
-    // "parents": [],
-		// "currentSpouse": 260451248
+    case "family": // get person's family
+    displayFamily(people, person)
     break;
-    case "descendants":
-    // TODO: get person's descendants
-    displayDescendants(people,person);
+    case "descendants": // get person's descendants
     break;
     case "restart":
     app(people); // restart
@@ -134,11 +126,15 @@ function mainMenu(person, people){
 //*Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
 //*region 
+// Prompts user for what they would like to search by
+// function receives data set
+// then parses for desired criteria
+// returns list/array of objects that match criteria
+// display list to console for user to view
 
-//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", firstNameValidation, people);
+  let lastName = promptFor("What is the person's last name?", lastNameValidation, people);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -148,7 +144,6 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
   return foundPerson[0];
 }
 
@@ -181,7 +176,6 @@ function searchByMultipleCriteria(people,arrChoices) {
   return displayArrPeople(personArr);
 }
 
-
 //Searches through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeCriteria(people,criteria){
     let foundPeople = people.filter(function(potentialMatch){
@@ -209,9 +203,9 @@ function searchByGender(people,criteria) {
   return foundPeople;
 }
 
-function searchByID(people,id) {
+function searchByID(people,criteria) {
   let foundPeople = people.filter(function(potentialMatch){
-    if(potentialMatch.id === id){
+    if(potentialMatch.id === criteria){
       return true;
     }
     else{
@@ -219,7 +213,7 @@ function searchByID(people,id) {
     }
   })
 
-  return foundPeople[0];
+  return foundPeople;
 }
 
 function searchByHeight(people,criteria) {
@@ -250,12 +244,11 @@ function searchByWeight(people,criteria) {
 
 function searchByParentID(people, person) {
   let foundPeople = people.filter(function(potentialMatch){
-    if (potentialMatch === person) {
-      return
+    if (potentialMatch === person || potentialMatch.parents.length === 0) {
+      return false
     } else if(JSON.stringify(potentialMatch.parents) === JSON.stringify(person.parents)){
       return true;
-    }
-    else{
+    } else{
       return false;
     }
   })
@@ -263,11 +256,6 @@ function searchByParentID(people, person) {
   return foundPeople;
 }
 
-// Prompts user for what they would like to search by
-// function receives data set
-// then parses for desired criteria
-// returns list/array of objects that match criteria
-// display list to console for user to view
 
 //*endregion
 
@@ -297,7 +285,6 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-//TODO: add option for siblings and validate response
 const displayFamily = function (people, person) {
   let spouse = searchByID(people, person.currentSpouse)
   let parents = personParents(people, person);
@@ -313,7 +300,6 @@ const displayFamily = function (people, person) {
   `)
   return msg
 }
-
 
 function displayDescendants(people,person) {
   let tempA = [];
@@ -366,20 +352,18 @@ function personParents(people, person) {
   return parents
 }
 
-
 //*endregion
-
 
 
 //*Validation functions.
 //*Functions to validate user input.
 //*///////////////////////////////////////////////////////////////
 //*region 
-
 //a function that takes in a question to prompt, and a callback function to validate the user input.
 //response: Will capture the user input.
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
+
 function promptFor(question,valid,people){
   let isValid;
   do{
@@ -395,6 +379,7 @@ function yesNo(input){
     return true;
   }
   else{
+    alert("Invalid Response! Please try again and type: Yes or No")
     return false;
   }
 }
@@ -405,8 +390,6 @@ function autoValid(input,people) {
   return true; // default validation only
 }
 
-//Unfinished validation function you can use for any of your custom validation callbacks.
-//can be used for things like eye color validation for example.
 function eyeValidation(input,people){
   let validateInput = generateEye(people);
   // ["blue","brown","black","hazel","green"];
@@ -421,6 +404,15 @@ function generateEye(people) {
     return arr;
 }
 
+function firstNameValidation (input, people) {
+  let firstName = generateFirstNames (people);
+  return firstName.includes(input);
+}
+function lastNameValidation (input, people) {
+  let firstName = generateLastNames (people);
+  return firstName.includes(input);
+}
+
 function idValidation(input,people) {
    let idPeople = generateIds(people);
   //  [272822514,401222887,409574486,260451248,629807187,464142841,
@@ -429,6 +421,22 @@ function idValidation(input,people) {
     return idPeople.includes(parseInt(input));
 }
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+function generateFirstNames (people) {
+  let arr = [];
+  people.forEach(function(element){
+    arr.push(element.firstName);
+  });
+  return arr;
+}
+
+function generateLastNames (people) {
+  let arr = [];
+  people.forEach(function(element){
+    arr.push(element.lastName);
+  });
+  return arr;
+}
+
 function generateIds(people) {
     let arr = [];
     people.forEach(function(element){
@@ -467,14 +475,6 @@ function generateWeights(people) {
   return arr;
 }
 
-
-function menuValidation(input) {
-  if(input==="info" || input==="family" || input==="descendants" || input==="restart" || input === "exit") {
-    return true;
-  }
-  return false;
-}
-
 const hasSpouse = function (spouse) {
   if (spouse.length >= 1) {
     return `${spouse[0].firstName} ${spouse[0].lastName}`
@@ -505,8 +505,6 @@ const hasSiblings = function (siblings) {
   else {
     return "N/A"
   }
-
 }
-
 
 //*endregion
