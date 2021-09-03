@@ -109,6 +109,7 @@ function mainMenu(person, people){
     displayFamily(people, person)
     break;
     case "descendants": // get person's descendants
+    displayDescendants(people,person);
     break;
     case "restart":
     app(people); // restart
@@ -213,7 +214,7 @@ function searchByID(people,criteria) {
     }
   })
 
-  return foundPeople;
+  return foundPeople[0];
 }
 
 function searchByHeight(people,criteria) {
@@ -303,7 +304,13 @@ const displayFamily = function (people, person) {
 
 function displayDescendants(people,person) {
   let tempA = [];
-  let array = descendantsRecursive(people,person,tempA);
+  let newPeople = [];
+  people.forEach(function (element) {
+    if(element.parents.length>0) {
+      newPeople.push(element);
+    } 
+  });
+  let array = descendantsRecursive(newPeople,person,tempA);
 
   if(array.length>=0) {
     let newArray = [];
@@ -323,24 +330,24 @@ function displayDescendants(people,person) {
 
 function descendantsRecursive(people,person,temp) {
   let newArray=temp;
-  let newEntry = false;
+  let update = false;
   people.forEach(function (element) {
     if(element.parents[0]===person.id) {
       newArray.push(element);
-      newEntry = true;
-      //descendantsRecursive(people,element,newArray);
+      update = true;
     } 
     else if(element.parents[1]===person.id) {
       newArray.push(element);
-      newEntry = true;
-      //descendantsRecursive(people,element,newArray);
+      update = true;
     } 
   });
-  if(newEntry) {
-    newArray.forEach(function (element) {
-        descendantsRecursive(people,element,newArray);
-    });
+
+  if(!update) {
+    return newArray;
   }
+  newArray.forEach(function (element) {
+    descendantsRecursive(people,element,newArray);
+  });
   return newArray;
 }
 
