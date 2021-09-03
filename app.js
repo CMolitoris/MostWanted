@@ -306,28 +306,11 @@ const displayFamily = function (people, person) {
 
 function displayDescendants(people,person) {
   let tempA = [];
-  // let newPeople = [];
-  // people.forEach(function (element) {
-  //   if(element.parents.length>0) {
-  //     newPeople.push(element);
-  //   } 
-  // });
   let array = descendantsRecursive(people,person);
-  // for(let i=0;i<array.length;i++) {
-  //   let counter = 0;
-  //   for(let j=0;j<array.length;j++) {
-  //     if(array[i].id===array[j].id) {
-  //       counter++;
-  //     }
-  //     if(counter>1) {
-  //       array.splice(j,1);
-  //     }
-  //   }
-  // }
   let removeDuplicates = array.filter((c,index) => {
     return array.indexOf(c) === index;
-  })
-  if(removeDuplicates.length>=0) {
+  });
+  if(removeDuplicates.length>0) {
     let newArray = [];
     let counter = 1;
     removeDuplicates.forEach(function (element) {
@@ -360,21 +343,6 @@ function descendantsRecursive(people,person,array=[]) {
     //newArray = newArray.concat(descendantsRecursive(people,newArray[i],storage));
     storage = descendantsRecursive(people,newArray[i],storage);
   }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return storage;
 }
 //----------------------------------------------------------
