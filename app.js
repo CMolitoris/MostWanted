@@ -324,11 +324,13 @@ function displayDescendants(people,person) {
   //     }
   //   }
   // }
-
-  if(array.length>=0) {
+  let removeDuplicates = array.filter((c,index) => {
+    return array.indexOf(c) === index;
+  })
+  if(removeDuplicates.length>=0) {
     let newArray = [];
     let counter = 1;
-    array.forEach(function (element) {
+    removeDuplicates.forEach(function (element) {
       newArray.push(counter + ": " + element.firstName + " " + element.lastName);
       counter++;
     });
