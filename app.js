@@ -102,22 +102,22 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(person);
-    mainMenu(person,people);
+      displayPerson(person);
+      mainMenu(person,people);
     break;
     case "family": // get person's family
-    displayFamily(people, person)
-    break;
+      displayFamily(people, person)
+      break;
     case "descendants": // get person's descendants
-    displayDescendants(people,person);
-    break;
+      displayDescendants(people,person);
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -483,8 +483,8 @@ function generateWeights(people) {
 }
 
 const hasSpouse = function (spouse) {
-  if (spouse.length >= 1) {
-    return `${spouse[0].firstName} ${spouse[0].lastName}`
+  if (spouse) {
+    return `${spouse.firstName} ${spouse.lastName}`
   } else {
     return "N/A"
   }
@@ -494,7 +494,7 @@ const hasParents = function (parents) {
   let parentNames = ""
   if (parents.length >= 1) {
     for (let i = 0; i < parents.length; i++)
-    parentNames += `${parents[i][0].firstName} ${parents[i][0].lastName} - `
+    parentNames += `${parents[i].firstName} ${parents[i].lastName} - `
     return parentNames
   } 
   else {
