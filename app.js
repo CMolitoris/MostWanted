@@ -84,7 +84,7 @@ function displayArrPeople(personArr) {
  // let arrCriteria = [data.eyeColor, data.id, data.height]
 function displayCriteria() {
     //print options console
-    let num = prompt("Which would you like to select?\n1: Eye color \n2: ID \n3: Height\n4: Weight\n5: Gender");
+    let num = prompt("Which would you like to select?\n1 - Eye Color\n2 - ID\n3 - Height\n4 - Weight\n5 - Gender\nPlease enter one number:");
     return num;
 }
 
@@ -102,22 +102,24 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(person);
-    mainMenu(person,people);
+      displayPerson(person);
+      mainMenu(person,people);
     break;
     case "family": // get person's family
-    displayFamily(people, person)
-    break;
+      displayFamily(people, person)
+      mainMenu(person,people);
+      break;
     case "descendants": // get person's descendants
-    displayDescendants(people,person);
-    break;
+      displayDescendants(people,person);
+      mainMenu(person,people);
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -506,8 +508,8 @@ function generateWeights(people) {
 }
 
 const hasSpouse = function (spouse) {
-  if (spouse.length >= 1) {
-    return `${spouse[0].firstName} ${spouse[0].lastName}`
+  if (spouse) {
+    return `\n  - ${spouse.firstName} ${spouse.lastName}`
   } else {
     return "N/A"
   }
@@ -517,7 +519,7 @@ const hasParents = function (parents) {
   let parentNames = ""
   if (parents.length >= 1) {
     for (let i = 0; i < parents.length; i++)
-    parentNames += `${parents[i][0].firstName} ${parents[i][0].lastName} - `
+    parentNames += `\n  - ${parents[i].firstName} ${parents[i].lastName}`
     return parentNames
   } 
   else {
@@ -529,7 +531,7 @@ const hasSiblings = function (siblings) {
   let siblingNames = ""
   if (siblings.length >= 1) {
     for (let i = 0; i < siblings.length; i++)
-    siblingNames += `${siblings[i].firstName} ${siblings[i].lastName} - `
+    siblingNames += `\n  - ${siblings[i].firstName} ${siblings[i].lastName}`
     return siblingNames
   } 
   else {
