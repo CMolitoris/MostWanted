@@ -84,7 +84,7 @@ function displayArrPeople(personArr) {
  // let arrCriteria = [data.eyeColor, data.id, data.height]
 function displayCriteria() {
     //print options console
-    let num = prompt("Which would you like to select?\n1: Eye color \n2: ID \n3: Height\n4: Weight\n5: Gender");
+    let num = prompt("Which would you like to select?\n1 - Eye Color\n2 - ID\n3 - Height\n4 - Weight\n5 - Gender\nPlease enter one number:");
     return num;
 }
 
