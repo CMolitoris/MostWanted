@@ -306,13 +306,24 @@ const displayFamily = function (people, person) {
 
 function displayDescendants(people,person) {
   let tempA = [];
-  let newPeople = [];
-  people.forEach(function (element) {
-    if(element.parents.length>0) {
-      newPeople.push(element);
-    } 
-  });
-  let array = descendantsRecursive(newPeople,person,tempA);
+  // let newPeople = [];
+  // people.forEach(function (element) {
+  //   if(element.parents.length>0) {
+  //     newPeople.push(element);
+  //   } 
+  // });
+  let array = descendantsRecursive(people,person);
+  // for(let i=0;i<array.length;i++) {
+  //   let counter = 0;
+  //   for(let j=0;j<array.length;j++) {
+  //     if(array[i].id===array[j].id) {
+  //       counter++;
+  //     }
+  //     if(counter>1) {
+  //       array.splice(j,1);
+  //     }
+  //   }
+  // }
 
   if(array.length>=0) {
     let newArray = [];
@@ -330,29 +341,41 @@ function displayDescendants(people,person) {
   mainMenu(person,people);
 }
 
-function descendantsRecursive(people,person,temp) {
-  let newArray=temp;
-  let update = false;
-  people.forEach(function (element) {
-    if(element.parents[0]===person.id) {
-      newArray.push(element);
-      update = true;
+//------------------------------------------------------
+function descendantsRecursive(people,person,array=[]) {
+  let storage = array;
+  let newArray=[];
+  for(let i=0;i<people.length;i++) {
+    if(people[i].parents[0]===person.id) {
+        newArray.push(people[i]);
     } 
-    else if(element.parents[1]===person.id) {
-      newArray.push(element);
-      update = true;
+    else if(people[i].parents[1]===person.id) {
+        newArray.push(people[i]);
     } 
-  });
-
-  if(!update) {
-    return newArray;
   }
-  newArray.forEach(function (element) {
-    descendantsRecursive(people,element,newArray);
-  });
-  return newArray;
-}
+  for(let i=0;i<newArray.length;i++) {
+    storage = storage.concat(newArray);
+    //newArray = newArray.concat(descendantsRecursive(people,newArray[i],storage));
+    storage = descendantsRecursive(people,newArray[i],storage);
+  }
+  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return storage;
+}
+//----------------------------------------------------------
 function personParents(people, person) {
   let parents = []
   person.parents.forEach(function (element){
