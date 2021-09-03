@@ -76,7 +76,7 @@ function displayArrPeople(personArr) {
     array.push(counter + ": " + element.firstName + " " + element.lastName);
     counter++;
   })
-  let person = prompt(array.join("\n") + "\n\nwhich would you like to see information on?" + " (1-" + personArr.length + ")");
+  let person = prompt(array.join("\n") + "\n\nWhich would you like to see information on?" + " (1-" + personArr.length + ")\nPlease select one person by entering one number:");
   return personArr[person-1];
 }
         
