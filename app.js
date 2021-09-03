@@ -486,7 +486,7 @@ function generateWeights(people) {
 
 const hasSpouse = function (spouse) {
   if (spouse) {
-    return `${spouse.firstName} ${spouse.lastName}`
+    return `\n  - ${spouse.firstName} ${spouse.lastName}`
   } else {
     return "N/A"
   }
@@ -496,7 +496,7 @@ const hasParents = function (parents) {
   let parentNames = ""
   if (parents.length >= 1) {
     for (let i = 0; i < parents.length; i++)
-    parentNames += `${parents[i].firstName} ${parents[i].lastName} - `
+    parentNames += `\n  - ${parents[i].firstName} ${parents[i].lastName}`
     return parentNames
   } 
   else {
@@ -508,7 +508,7 @@ const hasSiblings = function (siblings) {
   let siblingNames = ""
   if (siblings.length >= 1) {
     for (let i = 0; i < siblings.length; i++)
-    siblingNames += `${siblings[i].firstName} ${siblings[i].lastName} - `
+    siblingNames += `\n  - ${siblings[i].firstName} ${siblings[i].lastName}`
     return siblingNames
   } 
   else {
